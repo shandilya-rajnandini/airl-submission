@@ -11,7 +11,7 @@ A custom Vision Transformer was implemented and trained on the CIFAR-10 dataset.
 
 | Model Architecture | Best Test Accuracy |
 | :--- | :---: |
-| ViT (Depth: 10, Heads: 8) | **~85%** |
+| ViT (Depth: 10, Heads: 8) | **~85.64%** |
 
 ### Q2: Text-Driven Image Segmentation
 A pipeline was created to segment objects in an image based on a text prompt, using CLIPSeg for initial mask generation and SAM for high-quality refinement. The pipeline works effectively on custom images and prompts.
