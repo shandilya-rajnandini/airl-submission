@@ -44,9 +44,7 @@
 
 This project demonstrates a powerful, two-stage approach to zero-shot image segmentation. First, the **CLIPSeg** model generates a coarse mask from a user's text prompt. Then, the state-of-the-art **Segment Anything Model (SAM)** refines this mask to produce a high-fidelity final output.
 
-<p align="center">
-  <img src="link_to_your_final_dog_image.jpg" alt="Segmentation Demo" width="600"/>
-</p>
+
 
 ---
 
@@ -101,7 +99,7 @@ This project demonstrates a powerful, two-stage approach to zero-shot image segm
 
 | Task | Model / Method | Dataset | Result |
 |------|----------------|---------|--------|
-| Q1   | Vision Transformer (from scratch) | CIFAR-10 | ~85% accuracy |
+| Q1   | Vision Transformer (from scratch) | CIFAR-10 | ~85.64% accuracy |
 | Q2   | CLIPSeg + SAM | Custom images | High-quality text-driven segmentation |
 
 ---
