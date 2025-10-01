@@ -1,111 +1,64 @@
+# Vision Transformer & Text-Driven Segmentation
+
+<p align="center">
+  <em>Solutions for the AIRL Internship Coding Assignment, showcasing a from-scratch Vision Transformer and a state-of-the-art text-to-image segmentation pipeline.</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9%2B-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/PyTorch-2.0-orange.svg" alt="PyTorch">
+  <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Transformers-4.x-yellow.svg" alt="Hugging Face Transformers">
+  <img src="https://img.shields.io/badge/Made%20with-Colab-lightgrey.svg" alt="Google Colab">
+</p>
 
 ---
 
-## 🧑‍💻 Q1 — Vision Transformer on CIFAR-10
+## 🚀 Project Showcase
 
-### 🔬 Approach
-- Images are split into patches → embedded → passed through transformer blocks.  
-- Self-attention captures **global relationships** across patches.  
-- Classification is performed using the `[CLS]` token representation.  
+This project tackles two core deep learning challenges. **Part 1** involves building a **Vision Transformer (ViT)** from the ground up to achieve high accuracy on CIFAR-10. **Part 2** demonstrates a robust pipeline for **text-driven image segmentation** by integrating the CLIPSeg and Segment Anything (SAM) models.
 
-### ⚙️ Best Model Configuration
-| Parameter      | Value |
-|----------------|-------|
-| Embedding dim  | 256   |
-| Depth (layers) | 10    |
-| Heads          | 8     |
-| Patch size     | 4     |
-| Optimizer      | AdamW (lr=3e-4, wd=0.05) |
-| Scheduler      | Cosine LR with warmup |
-| Epochs         | 80    |
-
-### 📊 Results
-- ✅ **~85% test accuracy** on CIFAR-10.  
-- 📈 With larger models (ViT-L/H) and longer training, accuracy can exceed **90%**.  
+<p align="center">
+  <img src="link_to_your_final_dog_image.jpg" alt="Segmentation Demo" width="600"/>
+</p>
 
 ---
 
-## 🎨 Q2 — Text-driven Image Segmentation (CLIPSeg + SAM)
+## ✨ Key Features
 
-### 🔬 Pipeline
-1. **CLIPSeg (HuggingFace):** Generates a coarse segmentation mask from a text prompt.  
-2. **Seed Extraction:** High-confidence regions are converted to seed points.  
-3. **SAM (Segment Anything, Meta):** Refines segmentation to produce high-quality masks.  
-4. **Visualization:** Final mask is overlaid on the image and saved.  
+### Q1: Vision Transformer (ViT)
+- **Scratch Implementation:** ViT architecture built using PyTorch, including patch embeddings, multi-head self-attention, and transformer encoder blocks.
+- **Modern Training:** Trained using AdamW optimizer, a cosine annealing learning rate scheduler, and mixed-precision for efficiency.
+- **High Performance:** Achieved **~85% test accuracy** on the CIFAR-10 dataset.
 
-### 🖼️ Example
-- Input: `dog.jpg`  
-- Prompt: `"dog"`  
-- Output: `final_mask.png`  
-
-✨ The result is a **refined segmentation mask** corresponding to the text prompt.
+### Q2: Text-Driven Segmentation
+- **Zero-Shot Pipeline:** Segment any object in an image using only a text prompt, without needing any model retraining.
+- **Two-Stage Refinement:** Uses **CLIPSeg** to generate a coarse mask from text, which is then refined into a high-fidelity mask by the **Segment Anything Model (SAM)**.
+- **Interactive & Flexible:** Works on any user-uploaded image and allows for easy adjustment of model parameters.
 
 ---
 
-## ⚠️ Limitations & Future Work
-- **Q1 (ViT):**  
-  - Limited compute → trained medium-scale ViT.  
-  - 🚀 Future: MixUp, CutMix, longer training, and pretrained ViT models for higher accuracy.  
+## 📊 Results
 
-- **Q2 (Segmentation):**  
-  - CLIPSeg sometimes fails on vague prompts.  
-  - 🚀 Future: integrate **GroundingDINO** (text-to-box) + SAM for robust results.  
-  - SAM checkpoints are large (~2GB for ViT-H).  
+| Model | Task | Dataset | Best Accuracy |
+| :--- | :--- | :---: | :---: |
+| **Vision Transformer** | Image Classification | CIFAR-10 | **~85%** |
 
 ---
 
-## 💻 How to Run in Colab
+## 🛠️ Tech Stack
 
-### 1️⃣ Open in Colab
-- Go to [Google Colab](https://colab.research.google.com/).  
-- Upload `q1.ipynb` or `q2.ipynb`.  
-- Enable GPU:  
-  `Runtime → Change runtime type → Hardware accelerator → GPU → Save`.
-
-### 2️⃣ Run Q1 (Vision Transformer)
-- Run cells top-to-bottom.  
-- CIFAR-10 dataset auto-downloads.  
-- Best checkpoint saved as: **`best_vit_cifar10.pth`**.
-
-### 3️⃣ Run Q2 (Segmentation)
-- Run cells top-to-bottom.  
-- Upload an input image (e.g., `dog.jpg`).  
-- Enter a text prompt (e.g., `"dog"`).  
-- Output mask saved as **`final_mask.png`**.
+- **Core:** Python, PyTorch
+- **Models & Libraries:** Hugging Face Transformers, TIMM, `segment-anything` (Meta AI)
+- **Tools:** OpenCV, Supervision, Matplotlib, NumPy
+- **Environment:** Google Colab (GPU required)
 
 ---
 
-## 📊 Results Summary
+## ⚙️ Setup and Usage
 
-| Task | Model / Method | Dataset | Result |
-|------|----------------|---------|--------|
-| Q1   | Vision Transformer (from scratch) | CIFAR-10 | ~85% accuracy |
-| Q2   | CLIPSeg + SAM | Custom images | High-quality text-driven segmentation |
-
----
-
-## 🛠 Requirements
-All dependencies are installed automatically in the notebooks.  
-
-**Key Libraries:**  
-- PyTorch, Torchvision, Timm  
-- Transformers (HuggingFace)  
-- Segment Anything (Meta AI)  
-- OpenCV, Matplotlib, Pillow, Einops  
+1.  **Clone or Download:** Get the `q1.ipynb` and `q2.ipynb` files.
+2.  **Open in Colab:** Upload the notebooks to [Google Colab](https://colab.research.google.com/).
+3.  **Enable GPU:** In the menu, go to `Runtime` → `Change runtime type` and select `GPU`.
+4.  **Run All:** Execute all cells in the notebooks. All dependencies are installed automatically.
 
 ---
-
-## 📌 Credits
-- [Vision Transformer (ViT)](https://arxiv.org/abs/2010.11929)  
-- [CIFAR-10 Dataset](https://www.cs.toronto.edu/~kriz/cifar.html)  
-- [CLIPSeg (HuggingFace)](https://huggingface.co/CIDAS/clipseg-rd64-refined)  
-- [Segment Anything (Meta AI)](https://github.com/facebookresearch/segment-anything)  
-
----
-
-## ✨ Final Note
-This assignment demonstrates two complementary AI skills:  
-- Building **models from scratch** (Q1, Vision Transformer).  
-- Combining **pretrained state-of-the-art models** into a creative pipeline (Q2, CLIPSeg + SAM).  
-
-📈 Together, they highlight the power of both **theory + practice** in modern AI.  
